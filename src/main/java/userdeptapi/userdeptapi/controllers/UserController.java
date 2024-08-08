@@ -17,20 +17,20 @@ public class UserController {
     private UserRepository repository;
 
     @GetMapping
-    public List<User> findAll(){
+    public ResponseEntity<List<User>> findAll(){
         List<User> result = repository.findAll();
-        return result;
+        return ResponseEntity.ok().body(result);
     }
 
     @GetMapping(value = "/{id}")
-    public User findById(@PathVariable Long id){
+    public ResponseEntity<User> findById(@PathVariable Long id){
         User result = repository.findById(id).get();
-        return result;
+        return ResponseEntity.ok().body(result);
     }
 
     @PostMapping
-    public User insert (@RequestBody User user) {
-        return repository.save(user);
+    public ResponseEntity<User> insert (@RequestBody User user) {
+        return ResponseEntity.ok().body(repository.save(user));
     }
 
     @DeleteMapping(value = "/{id}")
